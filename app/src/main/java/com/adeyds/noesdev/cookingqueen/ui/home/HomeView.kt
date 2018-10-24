@@ -2,7 +2,7 @@ package com.adeyds.noesdev.cookingqueen.ui.home
 
 import com.adeyds.noesdev.cookingqueen.base.BasePresenter
 import com.adeyds.noesdev.cookingqueen.base.BaseView
-import com.adeyds.noesdev.cookingqueen.ui.home.homeModel.Resep
+import com.adeyds.noesdev.cookingqueen.ui.model.Resep
 
 interface HomeView {
 

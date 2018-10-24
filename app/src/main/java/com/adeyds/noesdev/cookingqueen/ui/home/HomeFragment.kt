@@ -3,139 +3,175 @@ package com.adeyds.noesdev.cookingqueen.ui.home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ProgressBar
+import android.view.inputmethod.EditorInfo
 import com.adeyds.noesdev.cookingqueen.R
-import com.adeyds.noesdev.cookingqueen.R.color.colorAccent
-import com.adeyds.noesdev.cookingqueen.ui.home.homeModel.MainAdapter
-import com.adeyds.noesdev.cookingqueen.ui.home.homeModel.Resep
+import com.adeyds.noesdev.cookingqueen.ui.detail.DetailActivity
+import com.adeyds.noesdev.cookingqueen.ui.model.Resep
+import com.adeyds.noesdev.cookingqueen.utils.Constants.Companion.EXTRA_DETAIL
 import kotlinx.android.synthetic.main.rview.*
-import org.jetbrains.anko.*
-import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.*
 
 
-class HomeFragment : Fragment(), HomeView.MainView, HomeView.View, MainAdapter.recipeClickListener {
-    override fun getItem(position: Int) {
-        toast("${resep.get(position).title}")
-    }
+class HomeFragment :
+        Fragment(),
+        HomeView.MainView,
+        HomeView.View,
+        HomeAdapter.recipeClickListener,
+        HomeAdapter.recipePageListener {
 
-//    private lateinit var listRecipe: RecyclerView
-//    private lateinit var progressBar: ProgressBar
-//    private lateinit var swipeRefresh: SwipeRefreshLayout
-//    private lateinit var rootView: View
-//      private lateinit var presenter: HomePresenter
 
     private lateinit var resep: List<Resep.ResultsItem>
-    private var data: List<Resep> = mutableListOf()
-    //  private lateinit var adapter: MainAdapter
-
     private lateinit var mPresenter: HomeView.Presenter
+    private var pageNumber: Int = 1
+    private var queryRec: String = ""
+    private var queryIng: String = ""
+    var isLayoutAdvance: Boolean = false
+    var isSearchBarHide: Boolean = false
+    lateinit var layoutManager: LinearLayoutManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HomePresenter(this, this)
-
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        adapter = MainAdapter(context, resep) {
-//            toast(it.title + " is from " + it.ingredients)
-//            //startActivity<DetailActivity>(EXTRA_DETAIL to it)
-//        }
-
-        //adapter = MainAdapter(resep, this)
-        // listRecipe.adapter = MainAdapter(resep, this)
-//        callRecipe(resep)
         mPresenter.getRecipe("", "", "1")
-        //   callRecipe()
+
         swp_layout.onRefresh {
-            mPresenter.getRecipe("", "", "1")
+            mPresenter.getRecipe(queryIng, queryRec, pageNumber.toString())
         }
+
+        scrollViewNested.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (scrollY < oldScrollY) { // up
+                animateSearchBar(false)
+            }
+            if (scrollY > oldScrollY) { // down
+                animateSearchBar(true)
+            }
+        })
+
+        btn_advance_search.setOnClickListener({ btn_advance_search ->
+            hideAdvanceSearch(isLayoutAdvance)
+        })
+
+        edt_search.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                getQueryRecipe()
+                true
+            }
+
+            false
+        }
+
+
     }
+
+    private fun getQueryRecipe() {
+
+        if (rb_ing.isSelected) {
+            queryRec = edt_search.text.toString()
+            queryIng = ""
+        } else {
+            queryIng = edt_search.text.toString()
+            queryRec = ""
+        }
+        pageNumber = 1
+        mPresenter.getRecipe(queryIng, queryRec, pageNumber.toString())
+    }
+
+    private fun hideAdvanceSearch(show: Boolean) {
+        if (!show) {
+            layout_advance_search.visibility = View.VISIBLE
+            rg_search.check(R.id.rb_recipe)
+        } else {
+            layout_advance_search.visibility = View.GONE
+        }
+        isLayoutAdvance = !show
+    }
+
+    private fun animateSearchBar(hide: Boolean) {
+        if (isSearchBarHide && hide || !isSearchBarHide && !hide) return
+        isSearchBarHide = hide
+        val moveY = if (hide) -(2 * csbar.height) else 0
+        csbar.animate().translationY(moveY.toFloat()).setStartDelay(100).setDuration(300).start()
+    }
+
+    override fun getItem(position: Int) {
+//        toast("${resep.get(position).title}")
+        startActivity<DetailActivity>(EXTRA_DETAIL to resep.get(position))
+    }
+
+    override fun page(isNext: Boolean) {
+        if (isNext) pageNumber++ else pageNumber--
+        if (pageNumber == 0) pageNumber = 1
+        mPresenter.getRecipe(queryIng, queryRec, pageNumber.toString())
+    }
+
 
     override fun setPresenter(presenter: HomeView.Presenter) {
         this.mPresenter = presenter
     }
 
     override fun showError(err: String) {
+        Log.e("Callhere", "hereerror123")
         toast("Error : $err")
-    }
+        rview_layout.visibility = View.INVISIBLE
+        no_inet.visibility = View.VISIBLE    }
 
+fun NoData(err: String){
+    Log.e("Callhere", "hereerror123")
+    toast("Error : $err")
+    rview_layout.visibility = View.INVISIBLE
+    no_data.visibility = View.VISIBLE
+}
+
+    fun findData(){
+        no_inet.visibility = View.GONE
+        no_data.visibility = View.GONE
+        rview_layout.visibility = View.VISIBLE
+
+    }
     override fun showLoading() {
-  //      swp_layout.isRefreshing = true
+        pbar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-//        swp_layout.isRefreshing = false
+        pbar.visibility = View.GONE
     }
 
     override fun showTeamList(dataNew: List<Resep.ResultsItem>) {
-        Log.e("showList HomeFragment", dataNew.toString() + " tot123123")
-    //    swp_layout.isRefreshing = false
-//        resep.clear()
-//        resep = dataNew.toMutableList()
-
-//        Log.e("cloneResep HomeFragment", resep.get(0).toString()+" tot123123")
-        callRecipe(dataNew)
-        //  adapter.notifyDataSetChanged()
+        swp_layout.isRefreshing = false
+        resep = dataNew
+        Log.e("nullKah", resep.toString())
+        if (resep.isEmpty()) NoData("No data found")
+        else callRecipe(dataNew)
     }
 
     fun callRecipe(data: List<Resep.ResultsItem>) {
-        rview_layout.setHasFixedSize(true)
-        rview_layout.layoutManager = LinearLayoutManager(context)
-        rview_layout.adapter = MainAdapter(data, this)
-
+        findData()
+        Log.e("Callhere", "hereiam123")
+            rview_layout.layoutManager = LinearLayoutManager(context)
+            rview_layout.adapter = HomeAdapter(data, this, this, pageNumber)
+            scrollViewNested.scrollTo(0, 0)
     }
 
 
-    //override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-    /* return UI {
-         linearLayout {
-             lparams(width = matchParent, height = matchParent)
-             orientation = LinearLayout.VERTICAL
-             topPadding = dip(16)
-             leftPadding = dip(16)
-             rightPadding = dip(16)
-
-
-             swipeRefresh = swipeRefreshLayout {
-                 setColorSchemeResources(colorAccent,
-                         android.R.color.holo_green_light,
-                         android.R.color.holo_orange_light,
-                         android.R.color.holo_red_light)
-
-                 relativeLayout {
-                     lparams(width = matchParent, height = wrapContent)
-
-                     listRecipe = recyclerView {
-                         lparams(width = matchParent, height = wrapContent)
-                         layoutManager = LinearLayoutManager(ctx)
-                     }.lparams()
-
-                     progressBar = progressBar {
-                     }.lparams {
-                         centerInParent()
-                     }
-                 }
-             }
-         }
-
-     }.view}*/
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.rview, container, false)
+        return inflater.inflate(R.layout.rview, container, false)
     }
 
 
 }
+
+

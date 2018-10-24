@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">CooKingQueen</string>
-    <string name="dummy">skfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoahskfjnsdfjbgfldsjafnlakdsjfnlkjadfnlkjnflsakdjfnkasjdfkdasbfksdbfaskldhbfadshlbfhasbfiahsdbfoiashdfiashdfiuasdfhaioshdfoabhfoah</string>
-    <string name="recipe">Resep</string>
-    <string name="ingredients">Bahan</string>
+    <string name="recipe">Recipe</string>
+    <string name="ingredients">Ingredients</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_detail">"Detail "</string>
+    <string name="removed">Removed from Favorite</string>
+    <string name="added">Added to Favorite</string>
+
+
+    <string name="share_body">Hey, do you know foods called</string>
+    <string name="share_body_2">Lets try this recipe, looks like delicious</string>
+    <string name="share_subject">FunKuk want to sharing about some food !</string>
 </resources>
