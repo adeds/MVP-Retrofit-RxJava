@@ -9,8 +9,7 @@ Pull this repo and open at Android Studio
 ### Prerequisites
 
 ``
-Android Studio latest version with Kotlin Support
-JDK
+Android Studio latest version with Kotlin Support & JDK
 ``
 
 ## Built With
