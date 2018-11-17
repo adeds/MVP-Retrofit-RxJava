@@ -11,17 +11,25 @@
         android:roundIcon="@drawable/food"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".ui.MainActivity"
+            android:screenOrientation="sensorPortrait"></activity>
+        <activity
+            android:name=".ui.detail.DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.detail.DetailActivity"
-            android:label="@string/title_activity_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/AD_APP_ID" />
+
     </application>
 
 </manifest>

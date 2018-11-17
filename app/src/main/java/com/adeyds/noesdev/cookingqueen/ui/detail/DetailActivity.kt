@@ -31,8 +31,12 @@ import android.view.Window
 import android.widget.TextView
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import com.adeyds.noesdev.cookingqueen.utils.Constants
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.ads.mediation.admob.AdMobAdapter
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 
 
 class DetailActivity : AppCompatActivity() {
@@ -46,7 +50,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
-
+        MobileAds.initialize(this, Constants.AD_APP_ID);
         resep = intent.getParcelableExtra(EXTRA_DETAIL)
         hrefUnik = resep.href
 
@@ -96,6 +100,16 @@ class DetailActivity : AppCompatActivity() {
         fab_more.setOnClickListener {
             showDialog(resep.title, resep.ingredients, resep.thumbnail)
         }
+        configAd()
+    }
+
+    private fun configAd() {
+        val extras = Bundle()
+        extras.putString("max_ad_content_rating", "G")
+        val request = AdRequest.Builder()
+                .addNetworkExtrasBundle(AdMobAdapter::class.java, extras)
+                .build()
+        adView3.loadAd(request)
     }
 
     private fun favoriteState() {

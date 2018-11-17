@@ -1,4 +1,4 @@
-package com.adeyds.noesdev.cookingqueen
+package com.adeyds.noesdev.cookingqueen.ui
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -14,7 +14,10 @@ import org.jetbrains.anko.toast
 import com.adeyds.noesdev.cookingqueen.utils.BottomNavigationViewBehavior
 import android.support.design.widget.CoordinatorLayout
 import android.util.Log
+import com.adeyds.noesdev.cookingqueen.R
 import com.adeyds.noesdev.cookingqueen.ui.favorite.FavoritesFragment
+import com.adeyds.noesdev.cookingqueen.utils.Constants
+import com.google.android.gms.ads.MobileAds
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.navigation_home -> {
                 supportActionBar?.title = "Home"
-                //search.setQuery("", false)
+
                 val home = HomeFragment()
                 openFragment(home)
                 return@OnNavigationItemSelectedListener true
@@ -32,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
             R.id.navigation_favorites -> {
                 supportActionBar?.title = "Favorite"
-                //search.setQuery("", false)
+
                 val favFragment = FavoritesFragment()
                 openFragment(favFragment)
                 return@OnNavigationItemSelectedListener true
@@ -54,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         bottom_nav.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         bottom_nav.selectedItemId = R.id.navigation_home
 
-
+        MobileAds.initialize(this, Constants.AD_APP_ID);
     }
 
     override fun onBackPressed() {
@@ -71,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         this.doubleBackToExitPressedOnce = true
-        toast("Press 2 times for exit")
+        toast("Press again for exit")
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
 
 

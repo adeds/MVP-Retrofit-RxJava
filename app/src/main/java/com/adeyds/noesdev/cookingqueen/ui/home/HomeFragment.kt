@@ -1,6 +1,7 @@
 package com.adeyds.noesdev.cookingqueen.ui.home
 
 
+import android.location.Location
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.NestedScrollView
@@ -14,6 +15,8 @@ import com.adeyds.noesdev.cookingqueen.R
 import com.adeyds.noesdev.cookingqueen.ui.detail.DetailActivity
 import com.adeyds.noesdev.cookingqueen.ui.model.Resep
 import com.adeyds.noesdev.cookingqueen.utils.Constants.Companion.EXTRA_DETAIL
+import com.google.ads.mediation.admob.AdMobAdapter
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.rview.*
 import org.jetbrains.anko.support.v4.*
 
@@ -39,11 +42,20 @@ class HomeFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HomePresenter(this, this)
+//        setRetainInstance(true);
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val extras = Bundle()
+        extras.putString("max_ad_content_rating", "G")
+        val request = AdRequest.Builder()
+                .addNetworkExtrasBundle(AdMobAdapter::class.java, extras)
+                .build()
+        adView.loadAd(request)
+        adView2.loadAd(request)
 
         mPresenter.getRecipe("", "", "1")
 

@@ -12,4 +12,7 @@
     <string name="share_body">Hey, do you know foods called</string>
     <string name="share_body_2">Lets try this recipe, looks like delicious</string>
     <string name="share_subject">FunKuk want to sharing about some food !</string>
+
+    <string name="AD_APP_ID">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="AD_BANNER_ID">ca-app-pub-3940256099942544/6300978111</string>
 </resources>
