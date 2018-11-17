@@ -1,6 +1,5 @@
 package com.adeyds.noesdev.cookingqueen.ui.home
 
-import android.util.Log
 import com.adeyds.noesdev.cookingqueen.api.APIServices
 import com.adeyds.noesdev.cookingqueen.ui.model.Resep
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,7 +20,6 @@ class HomePresenter(private val view: HomeView.View, private val viewImp: HomeVi
     }
 
     override fun start() {
-        Log.e("on start presenter", " tot123123")
     }
 
     override fun getRecipe(ingredients: String, query: String, page: String) {

@@ -62,7 +62,6 @@
                             android:id="@+id/adView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
                             ads:adSize="SMART_BANNER"
                             ads:adUnitId="@string/AD_BANNER_ID">
                         </com.google.android.gms.ads.AdView>
@@ -128,40 +127,12 @@
                                 android:layout_toLeftOf="@id/btn_advance_search"
                                 android:background="@drawable/bg_trans"
                                 android:gravity="center_vertical"
-                                android:hint="Search"
+                                android:hint="Search by ingredients or title"
                                 android:imeOptions="actionSearch"
                                 android:paddingHorizontal="10dp"
                                 android:singleLine="true" />
 
-                            <RelativeLayout
-                                android:id="@+id/layout_advance_search"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/edt_search"
-                                android:padding="5dp"
-                                android:visibility="gone">
 
-                                <RadioGroup
-                                    android:id="@+id/rg_search"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerHorizontal="true"
-                                    android:orientation="horizontal">
-
-                                    <RadioButton
-                                        android:id="@+id/rb_recipe"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/recipe" />
-
-                                    <RadioButton
-                                        android:id="@+id/rb_ing"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="100dp"
-                                        android:text="@string/ingredients" />
-                                </RadioGroup>
-                            </RelativeLayout>
 
                         </RelativeLayout>
 
