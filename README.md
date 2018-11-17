@@ -21,6 +21,7 @@ Android Studio latest version with Kotlin Support & JDK
 * [RxJava2](https://github.com/ReactiveX/RxJava) - Reactive Programming library.
 * [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android focused on smooth scrolling - bumptech/glide.
 * [Admob](https://admob.google.com/home/) - one of the largest global ad networks.
+* [Recipe Puppy](http://www.recipepuppy.com/) - ingredient based recipe search engine. 
 
 ## License
 
